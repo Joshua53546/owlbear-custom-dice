@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Dice</title>
+    <style>
+        /* Base Theme */
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            text-align: center; 
+            margin: 0;
+            padding: 20px; 
+            color: #ececec; 
+            background: linear-gradient(135deg, #1e1e24, #2b2b36);
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* Container for the Plus/Minus buttons */
+        .controls { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            margin-bottom: 20px; 
+            gap: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Number Display */
+        #dice-count {
+            font-size: 28px; 
+            font-weight: bold;
+            width: 30px;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* General Button Styles */
+        button { 
+            font-family: inherit;
+            cursor: pointer; 
+            border: none;
+            outline: none;
+            transition: all 0.2s ease; 
+        }
+
+        /* Plus & Minus Buttons */
+        .btn-adjust {
+            background: #3f4254;
+            color: white;
+            font-size: 24px;
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-adjust:hover { 
+            background: #4a4e69; 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        .btn-adjust:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Roll Button */
+        #btn-roll {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            letter-spacing: 2px;
+            padding: 15px 30px;
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(76, 175, 80, 0.3);
+            text-transform: uppercase;
+        }
+        #btn-roll:hover { 
+            background: linear-gradient(135deg, #55C059, #4CAF50);
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.5);
+        }
+        #btn-roll:active { 
+            transform: translateY(2px); 
+            box-shadow: 0 3px 10px rgba(76, 175, 80, 0.3);
+        }
+
+        /* Where the dice images spawn */
+        .results { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 12px; 
+            margin-top: 25px;
+        }
+
+        /* The custom dice images */
+        img { 
+            width: 80px; 
+            height: 80px; 
+            border-radius: 12px; 
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+            border: 2px solid #3f4254;
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="controls">
+        <button id="btn-minus" class="btn-adjust">-</button>
+        <span id="dice-count">1</span>
+        <button id="btn-plus" class="btn-adjust">+</button>
+    </div>
+    
+    <button id="btn-roll">Roll</button>
+
+    <div class="results" id="results-container">
+        </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>

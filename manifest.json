@@ -1,0 +1,12 @@
+{
+  "name": "Custom Dice Roller",
+  "version": "1.0.3",
+  "manifest_version": 1,
+  "action": {
+    "title": "Roll Custom Dice",
+    "icon": "icon.svg",
+    "popover": "index.html",
+    "width": 400,
+    "height": 600
+  }
+}
