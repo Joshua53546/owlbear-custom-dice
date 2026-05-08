@@ -1,11 +1,11 @@
 {
   "name": "Custom Dice Roller",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "manifest_version": 1,
   "action": {
     "title": "Roll Custom Dice",
-    "icon": "icon.svg",
-    "popover": "index.html",
+    "icon": "https://joshua53546.github.io/owlbear-custom-dice/icon.svg",
+    "popover": "https://joshua53546.github.io/owlbear-custom-dice/index.html",
     "width": 400,
     "height": 600
   }
