@@ -14,19 +14,19 @@ const resultsContainer = document.getElementById('results-container');
 function createDie() {
     const roll = Math.floor(Math.random() * 6) + 1;
     const img = document.createElement('img');
-    img.src = `assets/${roll}.png`;
-    img.alt = `Rolled ${roll}`;
     
-    // Listen for clicks on THIS specific die
+    // Set to strictly look for .jpg
+    img.src = `./assets/${roll}.jpg`;
+
+    // Listen for clicks on THIS specific die to reroll it
     img.addEventListener('click', () => {
-        // Generate a new roll for just this die
         const newRoll = Math.floor(Math.random() * 6) + 1;
-        img.src = `assets/${newRoll}.png`;
-        img.alt = `Rolled ${newRoll}`;
+        // Make sure the reroll also looks for .jpg
+        img.src = `./assets/${newRoll}.jpg`;
         
-        // This trick forces the CSS "popIn" animation to restart!
+        // Forces the CSS "popIn" animation to restart
         img.style.animation = 'none';
-        img.offsetHeight; // Triggers a browser reflow
+        img.offsetHeight; 
         img.style.animation = null; 
     });
     
@@ -59,7 +59,6 @@ OBR.onReady(() => {
         resultsContainer.innerHTML = ''; // Clear old dice
 
         for (let i = 0; i < diceCount; i++) {
-            // Use our new function to add a clickable die
             resultsContainer.appendChild(createDie());
         }
     });
