@@ -15,16 +15,13 @@ function createDie() {
     const roll = Math.floor(Math.random() * 6) + 1;
     const img = document.createElement('img');
     
-    // Set to strictly look for .jpg
     img.src = `./assets/${roll}.jpg`;
 
     // Listen for clicks on THIS specific die to reroll it
     img.addEventListener('click', () => {
         const newRoll = Math.floor(Math.random() * 6) + 1;
-        // Make sure the reroll also looks for .jpg
         img.src = `./assets/${newRoll}.jpg`;
         
-        // Forces the CSS "popIn" animation to restart
         img.style.animation = 'none';
         img.offsetHeight; 
         img.style.animation = null; 
@@ -33,11 +30,8 @@ function createDie() {
     return img;
 }
 
-// Initialize the extension inside Owlbear Rodeo
-OBR.onReady(() => {
-    OBR.action.setWidth(400);
-    OBR.action.setHeight(600);
-
+// Packages all your button logic into one easy-to-start function
+function startApp() {
     // Minus Button Logic
     btnMinus.addEventListener('click', () => {
         if (diceCount > MIN_DICE) {
@@ -62,4 +56,20 @@ OBR.onReady(() => {
             resultsContainer.appendChild(createDie());
         }
     });
-});
+}
+
+
+// --- THE MAGIC CHECK ---
+// Is Owlbear Rodeo available right now?
+if (OBR.isAvailable) {
+    // Yes! We are inside Owlbear. Wait for the handshake.
+    OBR.onReady(() => {
+        OBR.action.setWidth(400);
+        OBR.action.setHeight(600);
+        startApp(); // Turn on the buttons
+    });
+} else {
+    // No! We are just in a normal web browser. 
+    // Turn on the buttons immediately without waiting.
+    startApp(); 
+}
