@@ -10,13 +10,33 @@ const btnPlus = document.getElementById('btn-plus');
 const btnRoll = document.getElementById('btn-roll');
 const resultsContainer = document.getElementById('results-container');
 
+// A helper function to create a clickable die
+function createDie() {
+    const roll = Math.floor(Math.random() * 6) + 1;
+    const img = document.createElement('img');
+    img.src = `assets/${roll}.png`;
+    img.alt = `Rolled ${roll}`;
+    
+    // Listen for clicks on THIS specific die
+    img.addEventListener('click', () => {
+        // Generate a new roll for just this die
+        const newRoll = Math.floor(Math.random() * 6) + 1;
+        img.src = `assets/${newRoll}.png`;
+        img.alt = `Rolled ${newRoll}`;
+        
+        // This trick forces the CSS "popIn" animation to restart!
+        img.style.animation = 'none';
+        img.offsetHeight; // Triggers a browser reflow
+        img.style.animation = null; 
+    });
+    
+    return img;
+}
+
 // Initialize the extension inside Owlbear Rodeo
 OBR.onReady(() => {
-    
-    // --- THIS FIXES THE WINDOW SIZE ---
-    // Sets width to 340px and height to 500px
-    OBR.action.setWidth(340);
-    OBR.action.setHeight(500);
+    OBR.action.setWidth(400);
+    OBR.action.setHeight(600);
 
     // Minus Button Logic
     btnMinus.addEventListener('click', () => {
@@ -39,11 +59,8 @@ OBR.onReady(() => {
         resultsContainer.innerHTML = ''; // Clear old dice
 
         for (let i = 0; i < diceCount; i++) {
-            const roll = Math.floor(Math.random() * 6) + 1;
-            const img = document.createElement('img');
-            img.src = `assets/${roll}.jpg`;
-            img.alt = `Rolled ${roll}`;
-            resultsContainer.appendChild(img);
+            // Use our new function to add a clickable die
+            resultsContainer.appendChild(createDie());
         }
     });
 });
